@@ -117,6 +117,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Items.cshtml" />
+    <Content Include="Views\Home\AddItem.cshtml" />
+    <Content Include="Views\Home\ItemDetails.cshtml" />
+    <Content Include="Views\Home\DeleteItem.cshtml" />
+    <Content Include="Views\Home\EditItem.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
