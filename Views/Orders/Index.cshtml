@@ -1,10 +1,10 @@
-﻿@model IEnumerable<ASPProject.Models.Home.Item>
+﻿@model IEnumerable<ASPProject.Models.Home.Order>
 
 @{
-    ViewBag.Title = "Items";
+    ViewBag.Title = "Index";
 }
 
-<h2>Items</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,16 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ItemName)
+            @Html.DisplayNameFor(model => model.PutchaseDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.User.Username)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImagePath)
+            @Html.DisplayNameFor(model => model.State.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.Item.ItemName)
         </th>
         <th></th>
     </tr>
@@ -29,16 +29,16 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ItemName)
+            @Html.DisplayFor(modelItem => item.PutchaseDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @Html.DisplayFor(modelItem => item.User.Username)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ImagePath)
+            @Html.DisplayFor(modelItem => item.State.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Price)
+            @Html.DisplayFor(modelItem => item.Item.ItemName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

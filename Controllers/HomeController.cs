@@ -9,30 +9,54 @@ namespace ASPProject.Controllers
 {
     public class HomeController : Controller
     {
-        private ShopDB db = new ShopDB();
+        private ShopEntities context = new ShopEntities();
 
         [HttpGet]
         public ActionResult Index()
         {
-            var items = from e in db.Items
+            Item elementItems = new Item();
+            
+
+            //context.Orders.AddObject(order);
+            var items = from e in context.Items
                           orderby e.Id
                           select e;
-            return View(items);
+            foreach (var elem in items) 
+            {
+                Console.WriteLine(elem.ItemName + " " + elem.Description + " " + elem.Id);
+            }
+            //return View(items);
+
+            return Content(elementItems.Id.ToString());
         }
 
         [HttpGet]
         public ActionResult Items()
         {
-            var items = from e in db.Items
+            Item elementItems = new Item();
+            elementItems.ItemName = "Acer 150L";
+            elementItems.Description = "Laptop 1";
+            elementItems.ImagePath =  "none";
+            elementItems.Price =  1900.0;
+
+            context.Items.Add(elementItems);
+
+            var items = from e in context.Items
                         orderby e.Id
                         select e;
             return View(items);
+
+            //return Content("Items");
+
+            //return Content(elementItems.Id.ToString());
         }
+
 
         [HttpGet]
         public ActionResult Details()
         {
-            return View();
+            //return View();
+            return Content("Details");
         }
 
         [HttpGet]
