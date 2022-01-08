@@ -98,6 +98,12 @@
   <ItemGroup>
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="Images\buttonbg2.png" />
+    <Content Include="Images\buttonh.png" />
+    <Content Include="Images\form_bg1.png" />
+    <Content Include="Images\lock.png" />
+    <Content Include="Images\mail.png" />
+    <Content Include="Images\topimg.png" />
     <Content Include="Models\Home\Shop.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Shop.edmx</DependentUpon>
@@ -119,12 +125,14 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Styles\style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -191,6 +199,9 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Login\Successful.cshtml" />
+    <Content Include="Views\Login\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

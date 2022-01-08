@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/08/2022 02:14:08
+-- Date Created: 01/08/2022 23:08:01
 -- Generated from EDMX file: C:\Users\Alex\source\repos\SuperTexWorld\Models\Home\Shop.edmx
 -- --------------------------------------------------
 
@@ -17,14 +17,14 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_OrderItem]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Items] DROP CONSTRAINT [FK_OrderItem];
-GO
 IF OBJECT_ID(N'[dbo].[FK_UserOrder]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_UserOrder];
 GO
 IF OBJECT_ID(N'[dbo].[FK_StateOrder]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_StateOrder];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ItemOrder]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_ItemOrder];
 GO
 
 -- --------------------------------------------------

@@ -16,7 +16,6 @@ namespace ASPProject.Controllers
         {
             Item elementItems = new Item();
             
-
             //context.Orders.AddObject(order);
             var items = from e in context.Items
                           orderby e.Id
