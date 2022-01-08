@@ -58,68 +58,6 @@ namespace ASPProject.Controllers
             //return View();
             return Content("Details");
         }
-        [HttpPost]
-        public ActionResult AddItem(ItemModel item)
-        {
-            try
-            {
-                db.Items.Add(item);
-                db.SaveChanges();
-                return RedirectToAction("Items");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        [HttpGet]
-        public ActionResult ItemDetails(int id)
-        {
-            ItemModel item = db.Items.Single(m => m.Id == id);
-            return View(item);
-        }
-
-        [HttpGet]
-        public ActionResult DeleteItem(int id)
-        {
-            ItemModel item = db.Items.Single(m => m.Id == id);
-            return View(item);
-        }
-
-        [HttpPost]
-        public ActionResult DeleteItem(int id, FormCollection collection)
-        {
-            ItemModel item = db.Items.Single(m => m.Id == id);
-            db.Items.Remove(item);
-            db.SaveChanges();
-            return RedirectToAction("Items");
-        }
-
-        [HttpGet]
-        public ActionResult EditItem(int id)
-        {
-            ItemModel item = db.Items.Single(m => m.Id == id);
-            return View(item);
-        }
-
-        [HttpPost]
-        public ActionResult EditItem(int id, FormCollection collection)
-        {
-            try
-            {
-                ItemModel item = db.Items.Single(m => m.Id == id);
-                if (TryUpdateModel(item))
-                {
-                    db.SaveChanges();
-                    return RedirectToAction("Items");
-                }
-                return View(item);
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
