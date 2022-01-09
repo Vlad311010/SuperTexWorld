@@ -1,51 +1,58 @@
 ﻿@model IEnumerable<ASPProject.Models.Home.Item>
-
+@using ASPProject.Helpers
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Items/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="header">
+    <div class="container">
+        <div class="logo">
+            <h1><a href="index.html"><b>S<br>U<br>P<br>E<br>R</b>TexWorld<span>The Best Supermarket</span></a></h1>
+        </div>
+        <div class="head-t">
+            <ul class="card">
+                <li><a href="wishlist.html"><i class="fa fa-heart" aria-hidden="true"></i>Cart</a></li>
+                <li><a href="login.html"><i class="fa fa-user" aria-hidden="true"></i>Login</a></li>
+                <li><a href="register.html"><i class="fa fa-arrow-right" aria-hidden="true"></i>Register</a></li>
+                <li><a href="about.html"><i class="fa fa-file-text-o" aria-hidden="true"></i>Order History</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ItemName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ItemName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImagePath)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
 
-</table>
+
+<div class="grid-container">
+    @foreach (var item in Model)
+    {
+        <div class="grid-item">
+            <div class='col-md-3 m-wthree'>
+                <div class='col-m'>
+                    @Html.ShowItem(item)
+                    <div class="item-actions">
+
+                        <p class='button'>
+                            @Html.ActionLink("Details", "Details", new { id = item.Id })
+                        </p>
+                        @if (this.User.IsInRole("Administrator"))
+                         {
+                            <p class=''>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </p>
+                            <p class=''>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                            </p>
+                         }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
