@@ -21,11 +21,11 @@ namespace ASPProject.Controllers
         public ActionResult Verify(User u)
         {
             var user = from e in context.Users
-                       where e.Id == u.Id
+                       where e.Email == u.Email && e.Password == u.Password
                        select e;
-            if (user.Where(x => x.Id == u.Id && u.Password == x.Password).Count() == 1)
+            int p = user.Count();
+            if (user.Count() == 1)
             {
-
                 return View("Successful");
             }
 

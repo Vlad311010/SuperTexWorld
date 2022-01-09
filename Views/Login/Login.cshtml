@@ -7,14 +7,14 @@
 <div class="login">
 	<!--start-loginform-->
 	<form name="login-form" class="login-form" action="Verify" method="post">
-		<span class="header-top"><img src="Images/topimg.png" /></span>
+		<span class="header-top"><img src="~/Images/topimg.png" /></span>
 		<div class="header">
 			<h1>Login Form</h1>
 			<span>Fill out the form below to login</span>
 		</div>
 		<div class="content">
-			<input type="email" class="input username" placeholder="Email" required="">
-			<input type="password" class="input password" placeholder="Password" required="">
+			<input type="email" class="input username" placeholder="Email" name="Email" required="">
+			<input type="password" class="input password" placeholder="Password"  name="Password" required="">
 		</div>
 		<div class="login_button">
 			<input type="submit" name="submit" value="Login" class="button" />
@@ -27,22 +27,24 @@
 	<!--END side-icons-->
 	<!--Side-icons-->
 	<script type="text/javascript">
-	$(document).ready(function() {
-		$(".username").focus(function() {
-			$(".user-icon").css("left","-69px");
-		});
-		$(".username").blur(function() {
-			$(".user-icon").css("left","0px");
-		});
+		$(document).ready(function () {
+			$(".username").focus(function () {
+				$(".user-icon").css("left", "-69px");
+			});
+			$(".username").blur(function () {
+				$(".user-icon").css("left", "0px");
+			});
 
-		$(".password").focus(function() {
-			$(".pass-icon").css("left","-69px");
+			$(".password").focus(function () {
+				$(".pass-icon").css("left", "-69px");
+			});
+			$(".password").blur(function () {
+				$(".pass-icon").css("left", "0px");
+			});
 		});
-		$(".password").blur(function() {
-			$(".pass-icon").css("left","0px");
-		});
-	});
 	</script>
-	<p class="copy_right">&#169; 2014 Template by<a href="http://w3layouts.com" target="_blank">&nbsp;w3layouts</a> </p>
+	<!--
+		<p class="copy_right">&#169; 2014 Template by<a href="http://w3layouts.com" target="_blank">&nbsp;w3layouts</a> </p> 
+	-->
 
 </div>
