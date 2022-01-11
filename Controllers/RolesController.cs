@@ -7,112 +7,112 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ASPProject.Models.Home;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ASPProject.Controllers
 {
-    public class UsersController : Controller
+    public class RolesController : Controller
     {
         private ShopEntities db = new ShopEntities();
 
-        // GET: Users
+        // GET: Roles
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            return View(db.Roles.ToList());
         }
 
-        // GET: Users/Details/5
+        // GET: Roles/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            Role role = db.Roles.Find(id);
+            if (role == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(role);
         }
 
-        // GET: Users/Create
+        // GET: Roles/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Roles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Username,Password,Email,Role")] User user)
+        public ActionResult Create([Bind(Include = "Id,RoleName")] Role role)
         {
             if (ModelState.IsValid)
             {
-                string hashPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
-                user.Password = hashPassword;
-                db.Users.Add(user);
+                db.Roles.Add(role);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(user);
+            return View(role);
         }
 
-        // GET: Users/Edit/5
+        // GET: Roles/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            Role role = db.Roles.Find(id);
+            if (role == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(role);
         }
 
-        // POST: Users/Edit/5
+        // POST: Roles/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Username,Password,Email,Role")] User user)
+        public ActionResult Edit([Bind(Include = "Id,RoleName")] Role role)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
+                db.Entry(role).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(user);
+            return View(role);
         }
 
-        // GET: Users/Delete/5
+        // GET: Roles/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
+            Role role = db.Roles.Find(id);
+            if (role == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(role);
         }
 
-        // POST: Users/Delete/5
+        // POST: Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
+            Role role = db.Roles.Find(id);
+            db.Roles.Remove(role);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

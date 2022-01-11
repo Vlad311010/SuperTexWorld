@@ -21,6 +21,8 @@ namespace ASPProject
                 url: "{controller}/{action}/{id}", // dowolnie dużo segmentów (tenant/site/subsite/subsubsite/page)
                 defaults: new { controller = "Login", action = "Login", id = UrlParameter.Optional }
             );
+
+
         }
     }
 }

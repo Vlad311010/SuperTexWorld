@@ -4,99 +4,148 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Items">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ItemName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="250" />
-          <Property Name="ImagePath" Type="nvarchar" MaxLength="550" Nullable="false" />
-          <Property Name="Price" Type="float" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Orders">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PutchaseDate" Type="datetime" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="StateId" Type="int" Nullable="false" />
-          <Property Name="ItemId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="States">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Users">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_ItemOrder">
-          <End Role="Items" Type="Self.Items" Multiplicity="1" />
-          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Items">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="ItemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StateOrder">
-          <End Role="States" Type="Self.States" Multiplicity="1" />
-          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="States">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="StateId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserOrder">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="ShopModelStoreContainer">
-          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ItemOrder" Association="Self.FK_ItemOrder">
-            <End Role="Items" EntitySet="Items" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StateOrder" Association="Self.FK_StateOrder">
-            <End Role="States" EntitySet="States" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserOrder" Association="Self.FK_UserOrder">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="ShopModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ShopModelStoreContainer">
+    <EntitySet Name="Items" EntityType="ShopModel.Store.Items" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="ShopModel.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="ShopModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="States" EntityType="ShopModel.Store.States" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Roles" EntityType="ShopModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserRole" EntityType="ShopModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserOrder" Association="ShopModel.Store.UserOrder">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="StateOrder" Association="ShopModel.Store.StateOrder">
+      <End Role="State" EntitySet="States" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="ItemOrder" Association="ShopModel.Store.ItemOrder">
+      <End Role="Item" EntitySet="Items" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_User" Association="ShopModel.Store.FK_UserRole_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_Role" Association="ShopModel.Store.FK_UserRole_Role">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Items">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="250" />
+    <Property Name="ImagePath" Type="nvarchar" Nullable="false" MaxLength="550" />
+    <Property Name="Price" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PutchaseDate" Type="datetime" Nullable="true" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="StateId" Type="int" Nullable="false" />
+    <Property Name="ItemId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Role" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="States">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="Users_Id" />
+      <PropertyRef Name="Roles_Id" />
+    </Key>
+    <Property Name="Users_Id" Type="int" Nullable="false" />
+    <Property Name="Roles_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UserOrder">
+    <End Role="User" Type="ShopModel.Store.Users" Multiplicity="1" />
+    <End Role="Order" Type="ShopModel.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StateOrder">
+    <End Role="State" Type="ShopModel.Store.States" Multiplicity="1" />
+    <End Role="Order" Type="ShopModel.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ItemOrder">
+    <End Role="Item" Type="ShopModel.Store.Items" Multiplicity="1" />
+    <End Role="Order" Type="ShopModel.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="ItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_User">
+    <End Role="User" Type="ShopModel.Store.Users" Multiplicity="1" />
+    <End Role="UserRole" Type="ShopModel.Store.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="Users_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_Role">
+    <End Role="UserRole" Type="ShopModel.Store.UserRole" Multiplicity="*" />
+    <End Role="Role" Type="ShopModel.Store.Roles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="Roles_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -134,6 +183,7 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="ShopModel.UserOrder" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="Roles" Relationship="ShopModel.UserRole" FromRole="User" ToRole="Role" />
         </EntityType>
         <EntityContainer Name="ShopEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Items" EntityType="Self.Item" />
@@ -151,6 +201,11 @@
           <AssociationSet Name="ItemOrder" Association="ShopModel.ItemOrder">
             <End Role="Item" EntitySet="Items" />
             <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="Roles" EntityType="ShopModel.Role" />
+          <AssociationSet Name="UserRole" Association="ShopModel.UserRole">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Role" EntitySet="Roles" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="UserOrder">
@@ -196,6 +251,18 @@
               <PropertyRef Name="ItemId" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="ShopModel.UserRole" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <Association Name="UserRole">
+          <End Type="ShopModel.User" Role="User" Multiplicity="*" />
+          <End Type="ShopModel.Role" Role="Role" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -244,6 +311,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(ShopModel.Role)">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="UserRole" TypeName="ShopModel.UserRole" StoreEntitySet="UserRole">
+      <EndProperty Name="User">
+        <ScalarProperty Name="Id" ColumnName="Users_Id" />
+      </EndProperty>
+      <EndProperty Name="Role">
+        <ScalarProperty Name="Id" ColumnName="Roles_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

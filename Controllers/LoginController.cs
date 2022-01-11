@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -21,7 +22,7 @@ namespace ASPProject.Controllers
         public ActionResult Verify(User u)
         {
             var user = from e in context.Users
-                       where e.Email == u.Email && e.Password == u.Password
+                       where e.Email == u.Email && BCrypt.Net.BCrypt.Verify(u.Password, e.Password)
                        select e;
             int p = user.Count();
             if (user.Count() == 1)

@@ -29,5 +29,6 @@ namespace ASPProject.Models.Home
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<State> States { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
     }
 }
