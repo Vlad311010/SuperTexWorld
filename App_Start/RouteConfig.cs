@@ -19,7 +19,7 @@ namespace ASPProject
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}", // dowolnie dużo segmentów (tenant/site/subsite/subsubsite/page)
-                defaults: new { controller = "Login", action = "Login", id = UrlParameter.Optional }
+                defaults: new { controller = "Items", action = "Index", id = UrlParameter.Optional }
             );
 
 
