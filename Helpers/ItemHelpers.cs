@@ -35,9 +35,9 @@ namespace ASPProject.Helpers
 							"</div>" +
 							"<div class='clearfix'></div>" +
 						"</div>" +
-						"<div class='add'>" +
+						/*"<div class='add'>" +
 							"<button class='button' data-id='{3}' data-name='{1}' data-price='{2}' data-image='{0}'>Add to Cart</button>" +
-						"</div>" +
+						"</div>" +*/
 					"</div>";
 
 			Random rand = new Random(Guid.NewGuid().GetHashCode());

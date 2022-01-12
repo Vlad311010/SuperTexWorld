@@ -50,7 +50,7 @@ namespace ASPProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PutchaseDate,UserId,StateId,ItemId")] Order order)
+        public ActionResult Create(/*[Bind(Include = "Id,PutchaseDate,UserId,StateId,ItemId")]*/ Order order)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace ASPProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.Date = DateTime.Now;
             ViewBag.UserId = new SelectList(db.Users, "Id", "Username", order.UserId);
             ViewBag.StateId = new SelectList(db.States, "Id", "Description", order.StateId);
             ViewBag.ItemId = new SelectList(db.Items, "Id", "ItemName", order.ItemId);
