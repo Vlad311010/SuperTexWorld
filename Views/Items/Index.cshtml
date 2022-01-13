@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<ASPProject.Models.Home.Item>
 @using ASPProject.Helpers
-@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Items/_Layout.cshtml";
@@ -13,7 +12,7 @@
         </div>
         <div class="head-t">
             <ul class="card">
-                <li class="fa fa-heart">@Html.ActionLink("Cart", "Index", "Orders")</li>
+                <li class="fa fa-heart">@Html.ActionLink("Cart", "Cart", "Orders", new { userEmail = this.User.Identity.Name }, "")</li>
                 <li class="fa fa-heart">@Html.ActionLink("Login", "Login", "Login")</li>
                 <li class="fa fa-heart">@Html.ActionLink("Register", "Create", "Users")</li>
                 <li class="fa fa-heart">@Html.ActionLink("Orders", "Index", "Orders")</li>
@@ -39,7 +38,7 @@
                     <div class="item-actions">
                         <p class='button'>
                             
-                            @Html.ActionLink("Add To Cart", "ToCart", new { itemId = item.Id, userName = this.User.Identity.Name })
+                            @Html.ActionLink("Add To Cart", "ToCart", new { itemId = item.Id, userEmail = this.User.Identity.Name })
                         </p>
                         <p class='button'>
                             @Html.ActionLink("Details", "Details", new { id = item.Id })

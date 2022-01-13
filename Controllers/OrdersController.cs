@@ -21,6 +21,22 @@ namespace ASPProject.Controllers
             return View(orders.ToList());
         }
 
+        // GET: Orders
+        public ActionResult Cart(string userEmail)
+        {
+            User user = (from e in db.Users
+                         where e.Email == userEmail
+                         select e).FirstOrDefault();
+
+            var cartItems = (from e in db.Orders
+                              where e.UserId == user.Id 
+                                && e.State.Id == 1 //id of "InOrder" state
+                              select e);
+
+            return View(cartItems.ToList());
+        }
+
+
         // GET: Orders/Details/5
         public ActionResult Details(int? id)
         {

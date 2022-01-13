@@ -115,15 +115,15 @@ namespace ASPProject.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult ToCart(int itemId, string userName) 
+        public ActionResult ToCart(int itemId, string userEmail) 
         {
             // TODO:
             // if User nie zalogowany
             // then redirect To Login page
 
             User user = (from e in db.Users
-                       where e.Email == userName
-                       select e).FirstOrDefault();
+                          where e.Email == userEmail
+                          select e).FirstOrDefault();
             Item item = db.Items.Find(itemId);
             State state = db.States.Find(1); //InOrder - stateId = 1
             Order order = new Order();
