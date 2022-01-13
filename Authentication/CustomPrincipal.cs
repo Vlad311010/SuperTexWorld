@@ -19,7 +19,6 @@ namespace ASPProject.Authentication
 
         public bool IsInRole(string role)
         {
-            //if (user.Roles.Any(r => role.Contains(r.RoleName)))
             if (user.Role == role)
             {
                 return true;

@@ -67,18 +67,16 @@ namespace ASPProject.Authentication
 
         public override bool IsUserInRole(string username, string roleName)
         {
-            //var userRoles = GetRolesForUser(username);
-            //return userRoles.Contains(roleName);
             ShopEntities db = new ShopEntities();
-            //User user = db.Users.Find(username);
-            var user = from e in db.Users
+            
+            User user = (from e in db.Users
                         where e.Email == username
-                        select e;
+                        select e).FirstOrDefault();
             
             if (user == null)
                 return false;
 
-            string userRole = user.ToArray()[0].Role;
+            string userRole = user.Role;
             return roleName == userRole;
         }
 

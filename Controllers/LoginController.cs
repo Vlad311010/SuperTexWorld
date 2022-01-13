@@ -68,7 +68,7 @@ namespace ASPProject.Controllers
                     }
                 }
             }
-            ModelState.AddModelError("", "Something Wrong : Username or Password invalid ^_^ ");
+            ViewBag.Error = "Something Wrong : Username or Password invalid ^_^ ";
             return View();
         }
 
