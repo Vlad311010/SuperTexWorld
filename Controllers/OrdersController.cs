@@ -141,7 +141,7 @@ namespace ASPProject.Controllers
             Order order = db.Orders.Find(id);
             db.Orders.Remove(order);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Cart", "Orders", new { userEmail = this.User.Identity.Name });
         }
 
         protected override void Dispose(bool disposing)

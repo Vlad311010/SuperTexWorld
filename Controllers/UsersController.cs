@@ -12,17 +12,18 @@ namespace ASPProject.Controllers
 {
     public class UsersController : Controller
     {
-        private ShopEntities db = new ShopEntities();
 
         // GET: Users
         public ActionResult Index()
         {
+            ShopEntities db = new ShopEntities();
             return View(db.Users.ToList());
         }
 
         // GET: Users/Details/5
         public ActionResult Details(int? id)
         {
+            ShopEntities db = new ShopEntities();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -45,24 +46,30 @@ namespace ASPProject.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Username,Password,Email,Role")] User user)
+        //public ActionResult Create(User user)
+        public ActionResult Create(FormCollection collection)
         {
+            ShopEntities db = new ShopEntities();
+            User user = new User();
+            string hashPassword = BCrypt.Net.BCrypt.HashPassword(collection["Password"]);
+            user.Username = collection["Username"];
+            user.Password = hashPassword;
+            user.Email = collection["Email"];
+            user.Role = "User";
             if (ModelState.IsValid)
             {
-                string hashPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
-                user.Password = hashPassword;
+                
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(user);
         }
 
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
         {
+            ShopEntities db = new ShopEntities();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -82,6 +89,7 @@ namespace ASPProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Username,Password,Email,Role")] User user)
         {
+            ShopEntities db = new ShopEntities();
             if (ModelState.IsValid)
             {
                 db.Entry(user).State = EntityState.Modified;
@@ -94,6 +102,7 @@ namespace ASPProject.Controllers
         // GET: Users/Delete/5
         public ActionResult Delete(int? id)
         {
+            ShopEntities db = new ShopEntities();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -111,6 +120,7 @@ namespace ASPProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            ShopEntities db = new ShopEntities();
             User user = db.Users.Find(id);
             db.Users.Remove(user);
             db.SaveChanges();
@@ -119,6 +129,7 @@ namespace ASPProject.Controllers
 
         protected override void Dispose(bool disposing)
         {
+            ShopEntities db = new ShopEntities();
             if (disposing)
             {
                 db.Dispose();

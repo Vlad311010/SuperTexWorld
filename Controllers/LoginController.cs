@@ -39,7 +39,7 @@ namespace ASPProject.Controllers
         public ActionResult Login(User userModel, string ReturnUrl = "")
         {
             if (ModelState.IsValid)
-            {
+            {                
                 if (Membership.ValidateUser(userModel.Email, userModel.Password))
                 {
                     var user = (CustomMembershipUser)Membership.GetUser(userModel.Email, false);
@@ -72,12 +72,7 @@ namespace ASPProject.Controllers
             return View();
         }
 
-            /*[HttpGet]
-            public ActionResult Registration()
-            {
-                return View();
-            }
-
+        /*
             [HttpPost]
             public ActionResult Registration(RegistrationView registrationView)
             {
@@ -126,30 +121,7 @@ namespace ASPProject.Controllers
                 return View(registrationView);
             }
 
-            [HttpGet]
-            public ActionResult ActivationAccount(string id)
-            {
-                bool statusAccount = false;
-                using (AuthenticationDB dbContext = new DataAccess.AuthenticationDB())
-                {
-                    var userAccount = dbContext.Users.Where(u => u.ActivationCode.ToString().Equals(id)).FirstOrDefault();
-
-                    if (userAccount != null)
-                    {
-                        userAccount.IsActive = true;
-                        dbContext.SaveChanges();
-                        statusAccount = true;
-                    }
-                    else
-                    {
-                        ViewBag.Message = "Something Wrong !!";
-                    }
-
-                }
-                ViewBag.Status = statusAccount;
-                return View();
-            }
-
+            
             public ActionResult LogOut()
             {
                 HttpCookie cookie = new HttpCookie("Cookie1", "");
@@ -159,42 +131,6 @@ namespace ASPProject.Controllers
                 FormsAuthentication.SignOut();
                 return RedirectToAction("Login", "Account", null);
             }
-
-            [NonAction]
-            public void VerificationEmail(string email, string activationCode)
-            {
-                var url = string.Format("/Account/ActivationAccount/{0}", activationCode);
-                var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, url);
-
-                var fromEmail = new MailAddress("mehdi.rami2012@gmail.com", "Activation Account - AKKA");
-                var toEmail = new MailAddress(email);
-
-                var fromEmailPassword = "******************";
-                string subject = "Activation Account !";
-
-                string body = "<br/> Please click on the following link in order to activate your account" + "<br/><a href='" + link + "'> Activation Account ! </a>";
-
-                var smtp = new SmtpClient
-                {
-                    Host = "smtp.gmail.com",
-                    Port = 587,
-                    EnableSsl = true,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
-                };
-
-                using (var message = new MailMessage(fromEmail, toEmail)
-                {
-                    Subject = subject,
-                    Body = body,
-                    IsBodyHtml = true
-
-                })
-
-                    smtp.Send(message);
-
-            }*/
-        
+        */
     }
 }

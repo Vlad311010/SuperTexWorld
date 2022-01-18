@@ -6,20 +6,25 @@
 
 <div class="login">
 	<!--start-loginform-->
-	<form name="login-form" class="login-form" action="Login" method="post">
-		<span class="header-top"><img src="~/Images/topimg.png" /></span>
-		<div class="header">
-			<h1>Login Form</h1>
-			<span>Fill out the form below to login</span>
-		</div>
-		<div class="content">
-			<input type="email" class="input username" placeholder="Email" name="Email" required="">
-			<input type="password" class="input password" placeholder="Password"  name="Password" required="">
-		</div>
-		<div class="login_button">
-			<input type="submit" name="submit" value="Login" class="button" />
-		</div>
-	</form>
+    <form name="login-form" class="login-form" action="Login" method="post">
+        <span class="header-top"><img src="~/Images/topimg.png" /></span>
+        <div class="header">
+            <h1>Login Form</h1>
+            <span>Fill out the form below to login</span>
+        </div>
+        <div class="content">
+            <input type="email" class="input username" placeholder="Email" name="Email" required="">
+            <input type="password" class="input password" placeholder="Password" name="Password" required="">
+        </div>
+        <div class="login_button">
+            <input type="submit" name="submit" value="Login" class="button" />
+        </div>
+        <div class="login_button">
+            <span class="button">
+                @Html.ActionLink("Registration", "Create", "Users")
+            </span>
+        </div>
+    </form>
     <div>
         <span class="error">
             @ViewBag.Error

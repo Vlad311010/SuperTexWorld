@@ -5,16 +5,23 @@ using System.Web;
 using System.Web.Mvc;
 using ASPProject.Models.Home;
 
+
 namespace ASPProject.Helpers
 {
 	public static class ItemExtensions
 	{
-		public static IHtmlString AddItemsCSS(this HtmlHelper helper)
+		static ShopEntities context = new ShopEntities();
+		public static IHtmlString ShowItemShort(this HtmlHelper helper, int itemId)
         {
+			Item item = context.Items.Find(itemId);
 			string html =
-				"<style>" +
-				"</style>";
-
+				"<div>" +
+					"Item name: {0}" +
+				"<div><br>" +
+				"<div>" +
+					"Item price: {1}" +
+				"<div><br>";
+			html = string.Format(html, item.ItemName, item.Price);
 			return new MvcHtmlString(html);
 		}
 
