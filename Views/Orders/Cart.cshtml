@@ -3,48 +3,43 @@
 
 @{
     ViewBag.Title = "Cart";
+    Layout = "~/Views/Orders/_Layout.cshtml";
 }
 
 <h2>Cart</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PutchaseDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StateId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ItemId)
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PutchaseDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StateId)
-            </td>
-            <td>
-                @Html.ShowItemShort(item.ItemId)
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
-</table>
-<p class='button'>
-        @Html.ActionLink("Back", "Index", "Items")
-</p>
+    <div class="table">
+        <div class="table-header">
+            <div class="header__item"><a id="date" class="filter__link" href="#">Date</a></div>
+            <div class="header__item"><a id="userEmail" class="filter__link filter__link--number" href="#">User Email</a></div>
+            <div class="header__item"><a id="state" class="filter__link filter__link--number" href="#">State</a></div>
+            <div class="header__item"><a id="itemName" class="filter__link filter__link--number" href="#">Item Name</a></div>
+            <div class="header__item"><a id="price" class="filter__link filter__link--number" href="#">Price</a></div>
+        </div>
+        @{ 
+            int i = 0;
+        }
+        @foreach (var item in Model)
+        {
+            
+            <div class="table-content">
+                
+                <div class="@("table-row-" + (i%2 == 0 ? "first" : "second"))">
+                    <div class="table-data">@item.PutchaseDate</div>
+                    <div class="table-data">@this.User.Identity.Name</div>
+                    <div class="table-data">IN_CART</div>
+                    <div class="table-data">@Html.ShowItemName(item.ItemId)</div>
+                    <div class="table-data">@Html.ShowItemPrice(item.ItemId)</div>
+                </div>
+                <div class="@("table-row-" + (i%2 == 0 ? "first" : "second"))"> @Html.ActionLink("Delete", "Delete", new { id = item.Id }) </div>
+                <div class="@("table-row-" + (i++%2 == 0 ? "first" : "second"))"> @Html.ActionLink("Item Details", "Details", "Items", new { id = item.ItemId }, "") </div>
+                
+                    
+            </div>
+        }
+    </div>
+</div>
+
+        

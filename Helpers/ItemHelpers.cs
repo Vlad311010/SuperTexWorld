@@ -11,17 +11,21 @@ namespace ASPProject.Helpers
 	public static class ItemExtensions
 	{
 		static ShopEntities context = new ShopEntities();
-		public static IHtmlString ShowItemShort(this HtmlHelper helper, int itemId)
+		public static IHtmlString ShowItemName(this HtmlHelper helper, int itemId)
         {
 			Item item = context.Items.Find(itemId);
 			string html =
-				"<div>" +
-					"Item name: {0}" +
-				"<div><br>" +
-				"<div>" +
-					"Item price: {1}" +
-				"<div><br>";
-			html = string.Format(html, item.ItemName, item.Price);
+					"{0}";
+			html = string.Format(html, item.ItemName);
+			return new MvcHtmlString(html);
+		}
+
+		public static IHtmlString ShowItemPrice(this HtmlHelper helper, int itemId)
+		{
+			Item item = context.Items.Find(itemId);
+			string html =
+					"{0}";
+			html = string.Format(html, item.Price);
 			return new MvcHtmlString(html);
 		}
 

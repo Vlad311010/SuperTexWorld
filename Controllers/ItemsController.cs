@@ -120,7 +120,6 @@ namespace ASPProject.Controllers
             // TODO:
             // if User nie zalogowany
             // then redirect To Login page
-
             User user = (from e in db.Users
                           where e.Email == userEmail
                           select e).FirstOrDefault();

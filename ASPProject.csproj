@@ -206,7 +206,7 @@
     <Compile Include="Models\Home\User.cs">
       <DependentUpon>Shop.tt</DependentUpon>
     </Compile>
-    <Compile Include="Startup.cs" />
+    <Compile Include="App_Start\Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -250,6 +250,7 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Items\_Layout.cshtml" />
     <Content Include="Views\Orders\Cart.cshtml" />
+    <Content Include="Views\Orders\_Layout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

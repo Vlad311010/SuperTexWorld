@@ -17,6 +17,7 @@ namespace ASPProject
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            Start.Startup.CreateFirstAdminUser();
         }
 
         protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)

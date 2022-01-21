@@ -1,17 +1,20 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
+using ASPProject.Models.Home;
+using System.Data;
+using System.Linq;
 
-[assembly: OwinStartup(typeof(ASPProject.Startup))]
 
-namespace ASPProject
+[assembly: OwinStartup(typeof(ASPProject.Start.Startup))]
+
+namespace ASPProject.Start
 {
     public class Startup
     {
+        static ShopEntities db = new ShopEntities();
         public void Configuration(IAppBuilder app)
         {
             app.Use((context, next) =>
@@ -33,6 +36,26 @@ namespace ASPProject
         string getTime()
         {
             return DateTime.Now.Millisecond.ToString();
+        }
+
+        public static void CreateFirstAdminUser()
+        {
+
+            var admin = (from e in db.Users
+                         where e.Username == "admin"
+                         select e).FirstOrDefault();
+
+            if (admin == null)
+            {
+                User user = new User();
+                user.Username = "admin";
+                user.Email = "admin@stw.com";
+                string hashPassword = BCrypt.Net.BCrypt.HashPassword("admin");
+                user.Password = hashPassword;
+                user.Role = "Admin";
+                db.Users.Add(user);
+                db.SaveChanges();
+            }
         }
     }
 }
