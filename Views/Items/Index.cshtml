@@ -31,9 +31,21 @@
 
 @if (this.User.IsInRole("Admin"))
 {
-    <div class="button">
+<div>
+    <span class="button">
         @Html.ActionLink("Add New Item", "Create")
-    </div>
+    </span>
+    @using (Html.BeginForm("Index", "Items"))
+    {
+        <span class="align-right searchbar-border">
+            <span class="searchbar searchbar-label">
+                SEARCH:
+            </span>
+                <input value="@ViewBag.SearchString" id="searchString" name="searchString" class="searchbar-input" />
+                <input width="0" class="search-button" id="submit" type="submit" value=">" />
+            </span>
+    }
+</div>
 }
 
 

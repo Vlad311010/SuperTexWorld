@@ -15,9 +15,22 @@ namespace ASPProject.Controllers
         private ShopEntities db = new ShopEntities();
 
         // GET: Items
-        public ActionResult Index()
+        public async System.Threading.Tasks.Task<ActionResult> Index(string searchString="")
+        //public ActionResult Index(string searchString = "")
         {
-            return View(db.Items.ToList());
+            var items = from e in db.Items
+                        select e;
+
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                items = items.Where(s => s.ItemName.Contains(searchString));
+            }
+            ViewBag.SearchString = searchString;
+            ViewBag.Value = "VAL";
+
+            return View(await items.ToListAsync());
+            //return View(items.ToList());
         }
 
         // GET: Items/Details/5
