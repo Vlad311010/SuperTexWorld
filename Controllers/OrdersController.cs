@@ -28,12 +28,22 @@ namespace ASPProject.Controllers
                          where e.Email == userEmail
                          select e).FirstOrDefault();
 
+            if (user.Role == "Admin")
+                return RedirectToAction("AdminCartSelection");
+
             var cartItems = (from e in db.Orders
                               where e.UserId == user.Id 
                                 && e.State.Id == 1 //id of "InOrder" state
                               select e);
 
             return View(cartItems.ToList());
+        }
+        
+        [Authorize(Roles = "Admin")]
+        public ActionResult AdminCartSelection()
+        {
+            ShopEntities db = new ShopEntities();
+            return View(db.Users.ToList());
         }
 
 

@@ -8,6 +8,8 @@
 
 <h2>Cart</h2>
 
+
+
 <div class="container">
 
     <div class="table">
@@ -23,12 +25,17 @@
         }
         @foreach (var item in Model)
         {
-            
+            if (!this.User.IsInRole("Admin") && this.User.Identity.Name != @Html.GetUserEmail(item.UserId))
+            {
+                <span>You aren't autorized as user of this cart</span>
+                break;
+            }
+
             <div class="table-content">
                 
                 <div class="@("table-row-" + (i%2 == 0 ? "first" : "second"))">
                     <div class="table-data">@item.PutchaseDate</div>
-                    <div class="table-data">@this.User.Identity.Name</div>
+                    <div class="table-data">@Html.GetUserEmail(item.UserId)</div>
                     <div class="table-data">IN_CART</div>
                     <div class="table-data">@Html.ShowItemName(item.ItemId)</div>
                     <div class="table-data">@Html.ShowItemPrice(item.ItemId)</div>

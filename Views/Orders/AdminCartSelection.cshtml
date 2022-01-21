@@ -1,0 +1,17 @@
+﻿@model IEnumerable<ASPProject.Models.Home.User>
+
+@{
+    ViewBag.Title = "AdminCartSelection";
+}
+
+<h2>AdminCartSelection</h2>
+
+@{
+    var collection = Model.Select(a => new SelectListItem() { Text = a.Email.ToString(), Value = a.Email });
+}
+@using (Html.BeginForm("Cart", "Orders", FormMethod.Post))
+{
+    @Html.DropDownList("userEmail", collection)
+    <input type="submit" value="Show Cart" />
+}
+

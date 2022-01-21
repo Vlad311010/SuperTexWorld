@@ -20,6 +20,10 @@
                 <li class="fa fa-heart">@Html.ActionLink("Login", "Login", "Login")</li>
                 <li class="fa fa-heart">@Html.ActionLink("Register", "Create", "Users")</li>
                 <li class="fa fa-heart">@Html.ActionLink("Orders", "Index", "Orders")</li>
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <li class="fa fa-heart">@Html.ActionLink("Users", "Index", "Users")</li>
+                }
             </ul>
         </div>
     </div>

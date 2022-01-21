@@ -10,17 +10,17 @@ using ASPProject.Models.Home;
 
 namespace ASPProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
 
-        // GET: Users
         public ActionResult Index()
         {
             ShopEntities db = new ShopEntities();
             return View(db.Users.ToList());
         }
 
-        // GET: Users/Details/5
+        
         public ActionResult Details(int? id)
         {
             ShopEntities db = new ShopEntities();
@@ -37,6 +37,8 @@ namespace ASPProject.Controllers
         }
 
         // GET: Users/Create
+        [AllowAnonymous]
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Create()
         {
             return View();
@@ -46,7 +48,8 @@ namespace ASPProject.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        //public ActionResult Create(User user)
+        [AllowAnonymous]
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Create(FormCollection collection)
         {
             ShopEntities db = new ShopEntities();
@@ -61,7 +64,7 @@ namespace ASPProject.Controllers
                 
                 db.Users.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Items");
             }
             return View(user);
         }

@@ -173,7 +173,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\ItemHelpers.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
+    <Compile Include="Models\Home\Enums.cs" />
     <Compile Include="Models\Home\Item.cs">
       <DependentUpon>Shop.tt</DependentUpon>
     </Compile>
@@ -251,6 +252,7 @@
     <Content Include="Views\Items\_Layout.cshtml" />
     <Content Include="Views\Orders\Cart.cshtml" />
     <Content Include="Views\Orders\_Layout.cshtml" />
+    <Content Include="Views\Orders\AdminCartSelection.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -260,6 +262,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ItemsImages\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

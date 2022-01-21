@@ -8,6 +8,16 @@ using ASPProject.Models.Home;
 
 namespace ASPProject.Helpers
 {
+	public static class UserExtensions
+    {
+		static ShopEntities context = new ShopEntities();
+		public static string GetUserEmail(this HtmlHelper helper, int userId)
+        {
+			User user = context.Users.Find(userId);
+
+			return user.Email;
+		}
+	}
 	public static class ItemExtensions
 	{
 		static ShopEntities context = new ShopEntities();
@@ -46,9 +56,6 @@ namespace ASPProject.Helpers
 							"</div>" +
 							"<div class='clearfix'></div>" +
 						"</div>" +
-						/*"<div class='add'>" +
-							"<button class='button' data-id='{3}' data-name='{1}' data-price='{2}' data-image='{0}'>Add to Cart</button>" +
-						"</div>" +*/
 					"</div>";
 
 			Random rand = new Random(Guid.NewGuid().GetHashCode());
