@@ -39,6 +39,12 @@ namespace ASPProject.Helpers
 			return new MvcHtmlString(html);
 		}
 
+		public static double GetItemPrice(this HtmlHelper helper, int itemId)
+		{
+			Item item = context.Items.Find(itemId);
+			return item.Price;
+		}
+
 		public static IHtmlString ShowItem(this HtmlHelper helper, Item item)
 		{
 			string html =

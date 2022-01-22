@@ -8,8 +8,6 @@
 
 <h2>Cart</h2>
 
-
-
 <div class="container">
 
     <div class="table">
@@ -20,8 +18,9 @@
             <div class="header__item"><a id="itemName" class="filter__link filter__link--number" href="#">Item Name</a></div>
             <div class="header__item"><a id="price" class="filter__link filter__link--number" href="#">Price</a></div>
         </div>
-        @{ 
+        @{
             int i = 0;
+            double totalSum = 0;
         }
         @foreach (var item in Model)
         {
@@ -32,18 +31,25 @@
             }
 
             <div class="table-content">
-                
-                <div class="@("table-row-" + (i%2 == 0 ? "first" : "second"))">
+
+                <div class="@("table-row-" + (i % 2 == 0 ? "first" : "second"))">
                     <div class="table-data">@item.PutchaseDate</div>
                     <div class="table-data">@Html.GetUserEmail(item.UserId)</div>
                     <div class="table-data">IN_CART</div>
                     <div class="table-data">@Html.ShowItemName(item.ItemId)</div>
                     <div class="table-data">@Html.ShowItemPrice(item.ItemId)</div>
                 </div>
-                <div class="@("table-row-" + (i%2 == 0 ? "first" : "second"))"> @Html.ActionLink("Delete", "Delete", new { id = item.Id }) </div>
-                <div class="@("table-row-" + (i++%2 == 0 ? "first" : "second"))"> @Html.ActionLink("Item Details", "Details", "Items", new { id = item.ItemId }, "") </div>
-                
-                    
+                <div class="@("table-row-" + (i % 2 == 0 ? "first" : "second")) action-button"> @Html.ActionLink("Delete", "Delete", new { id = item.Id }) </div>
+                <div class="@("table-row-" + (i++ % 2 == 0 ? "first" : "second")) action-button"> @Html.ActionLink("Item Details", "Details", "Items", new { id = item.ItemId }, "") </div>
+            </div>
+            totalSum += Convert.ToDouble(Html.ShowItemPrice(item.ItemId).ToString());
+
+        }
+        @if (totalSum > 0)
+        {
+            <div>
+                Total: @totalSum
+                @Html.ActionLink("Purchase", "Purchase", "Orders", new { userEmail = this.User.Identity.Name }, new { @class = "button" })
             </div>
         }
     </div>

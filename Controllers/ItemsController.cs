@@ -24,10 +24,9 @@ namespace ASPProject.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                items = items.Where(s => s.ItemName.Contains(searchString));
+                items = items.Where(s => s.ItemName.Contains(searchString) || s.Description.Contains(searchString));
             }
             ViewBag.SearchString = searchString;
-            ViewBag.Value = "VAL";
 
             return View(await items.ToListAsync());
             //return View(items.ToList());
@@ -140,7 +139,7 @@ namespace ASPProject.Controllers
             State state = db.States.Find(1); //InOrder - stateId = 1
             Order order = new Order();
 
-            order.Id = db.Items.Count();
+            //order.Id = db.Items.Count();
             order.PutchaseDate = DateTime.Now;
             order.UserId = user.Id;
             order.StateId = 1;

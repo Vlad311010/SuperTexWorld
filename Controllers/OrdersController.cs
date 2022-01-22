@@ -32,13 +32,47 @@ namespace ASPProject.Controllers
                 return RedirectToAction("AdminCartSelection");
 
             var cartItems = (from e in db.Orders
-                              where e.UserId == user.Id 
-                                && e.State.Id == 1 //id of "InOrder" state
-                              select e);
+                             where e.UserId == user.Id
+                               && e.State.Id == 1 //id of "InOrder" state
+                             select e);
 
             return View(cartItems.ToList());
         }
         
+        [Authorize(Roles = "User")]
+        public ActionResult Purchase(string userEmail)
+        {
+            User user = (from e in db.Users
+                         where e.Email == userEmail
+                         select e).FirstOrDefault();
+
+            var cartItems = (from e in db.Orders
+                             where e.UserId == user.Id
+                               && e.State.Id == 1 //id of "InOrder" state
+                             select e);
+
+            foreach (var cartItem in cartItems)
+            {
+                db.Orders.Remove(cartItem);
+                State state = db.States.Find(2); //InOrder - stateId = 1
+                Order order = new Order();
+
+                //order.Id = db.Items.Count();
+                order.Item = cartItem.Item;
+                order.ItemId = cartItem.ItemId;
+                order.UserId = cartItem.UserId;
+                order.PutchaseDate = DateTime.Now;
+                order.StateId = 2;
+
+                order.User = user;
+                order.State = state;
+                db.Orders.Add(order);
+            }
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Items");
+        }
+
         [Authorize(Roles = "Admin")]
         public ActionResult AdminCartSelection()
         {
@@ -70,6 +104,7 @@ namespace ASPProject.Controllers
             ViewBag.ItemId = new SelectList(db.Items, "Id", "ItemName");
             return View();
         }
+
 
         // POST: Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 

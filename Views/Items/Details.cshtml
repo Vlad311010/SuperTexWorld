@@ -172,7 +172,7 @@
                             <!--product_content_content-->
                             <p>@Model.Description</p><!--/product_content_content-->
                         </div><!--/product_content--><!--product_button--><!--options_json--><!--{"clickType":"add-to-cart","content":""}--><!--/options_json-->
-                        <p class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-product-control u-btn-1"><!--product_button_content-->@Html.ActionLink("Add to Cart", "ToCart")<!--/product_button_content--></p><!--/product_button-->
+                        <p class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-product-control u-btn-1"><!--product_button_content-->@Html.ActionLink("Add To Cart", "ToCart", new { itemId = Model.Id, userEmail = this.User.Identity.Name })<!--/product_button_content--></p><!--/product_button-->
                     </div>
                 </div>
             </div>
