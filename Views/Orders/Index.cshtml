@@ -1,51 +1,40 @@
 ﻿@model IEnumerable<ASPProject.Models.Home.Order>
+@using ASPProject.Helpers
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Orders/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Orders</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PutchaseDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.Username)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Item.ItemName)
-        </th>
-        <th></th>
-    </tr>
+<div class="container">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PutchaseDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.Username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Item.ItemName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    <div class="table">
+        <div class="table-header">
+            <div class="header__item"><a id="date" class="filter__link" href="#">Date</a></div>
+            <div class="header__item"><a id="userEmail" class="filter__link filter__link--number" href="#">User Email</a></div>
+            <div class="header__item"><a id="state" class="filter__link filter__link--number" href="#">State</a></div>
+            <div class="header__item"><a id="itemName" class="filter__link filter__link--number" href="#">Item Name</a></div>
+            <div class="header__item"><a id="price" class="filter__link filter__link--number" href="#">Price</a></div>
+        </div>
+        @{
+            int i = 0;
+        }
+        @foreach (var item in Model)
+        {
+            <div class="table-content">
 
-</table>
+                <div class="@("table-row-" + (i % 2 == 0 ? "first" : "second"))">
+                    <div class="table-data">@item.PutchaseDate</div>
+                    <div class="table-data">@Html.GetUserEmail(item.UserId)</div>
+                    <div class="table-data">@item.State.Description</div>
+                    <div class="table-data">@Html.ShowItemName(item.ItemId)</div>
+                    <div class="table-data">@Html.ShowItemPrice(item.ItemId)</div>
+                </div>
+                <div class="@("table-row-" + (i++ % 2 == 0 ? "first" : "second")) action-button"> @Html.ActionLink("Item Details", "Details", "Items", new { id = item.ItemId }, "") </div>
+            </div>
+
+        }
+    </div>
+</div>

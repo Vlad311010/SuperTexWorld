@@ -14,7 +14,7 @@ namespace ASPProject.Controllers
     {
         private ShopEntities db = new ShopEntities();
 
-        // GET: Orders
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var orders = db.Orders.Include(o => o.User).Include(o => o.State).Include(o => o.Item);
