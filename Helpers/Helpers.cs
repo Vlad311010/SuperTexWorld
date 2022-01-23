@@ -64,12 +64,11 @@ namespace ASPProject.Helpers
 						"</div>" +
 					"</div>";
 
-			Random rand = new Random(Guid.NewGuid().GetHashCode());
-			
+			//Random rand = new Random(Guid.NewGuid().GetHashCode());
 			//string ImagePath1 = "https://cdn.mos.cms.futurecdn.net/VdvpuXPAzBGSYKwznGb4N9-1024-80.jpg.webp";
 			//string ImagePath2 = "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4OXzi?ver=3a58&q=90&m=6&h=270&w=270&b=%23FF171717&o=f&aim=true";
 			//string ImagePath3 = "https://media.istockphoto.com/photos/modern-laptop-with-empty-screen-on-white-background-mockup-design-picture-id1182241805?b=1&k=20&m=1182241805&s=170667a&w=0&h=EDTQE8otN4xNEDfj-r0cFIlMmnLKWcQM_xTesSRKSIc=";
-			double randVal = rand.NextDouble();
+			//double randVal = rand.NextDouble();
 
 
 			html = string.Format(html, item.ImagePath, item.ItemName, item.Price, item.Id);
