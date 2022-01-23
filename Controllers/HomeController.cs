@@ -32,6 +32,7 @@ namespace ASPProject.Controllers
         [HttpGet]
         public ActionResult Items()
         {
+            /*TODO remove*/
             Item elementItems = new Item();
             elementItems.ItemName = "Acer 150L";
             elementItems.Description = "Laptop 1";

@@ -18,6 +18,14 @@ namespace ASPProject.Controllers
         public async System.Threading.Tasks.Task<ActionResult> Index(string searchString="")
         //public ActionResult Index(string searchString = "")
         {
+            Item elementItems = new Item();
+            elementItems.ItemName = "HP 150L";
+            elementItems.Description = "Laptop 1";
+            elementItems.ImagePath = "\\Content\\DataImage\\HP-laptop1.png";
+            elementItems.Price = 1900.0;
+
+            db.Items.Add(elementItems);
+
             var items = from e in db.Items
                         select e;
 
@@ -62,6 +70,8 @@ namespace ASPProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (item.ImagePath == null)
+                    item.ImagePath = "\\Content\\DataImage\\no-image.png";
                 db.Items.Add(item);
                 db.SaveChanges();
                 return RedirectToAction("Index");
