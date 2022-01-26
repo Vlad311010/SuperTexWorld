@@ -72,6 +72,17 @@ namespace ASPProject.Controllers
             return View();
         }
 
+
+        public ActionResult LogOut()
+        {
+            HttpCookie cookie = new HttpCookie("Cookie1", "");
+            cookie.Expires = DateTime.Now.AddYears(-1);
+            Response.Cookies.Add(cookie);
+
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Items");
+        }
+
         /*
             [HttpPost]
             public ActionResult Registration(RegistrationView registrationView)
@@ -121,16 +132,7 @@ namespace ASPProject.Controllers
                 return View(registrationView);
             }
 
-            
-            public ActionResult LogOut()
-            {
-                HttpCookie cookie = new HttpCookie("Cookie1", "");
-                cookie.Expires = DateTime.Now.AddYears(-1);
-                Response.Cookies.Add(cookie);
 
-                FormsAuthentication.SignOut();
-                return RedirectToAction("Login", "Account", null);
-            }
         */
     }
 }

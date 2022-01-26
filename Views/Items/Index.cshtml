@@ -16,7 +16,11 @@
                 <!--You are logined with mail @this.User.Identity.Name-->
             </div>
             <ul class="card">
-                <li class="fa fa-heart">@Html.ActionLink("Cart", "Cart", "Orders", new { userEmail = this.User.Identity.Name }, "")</li>
+                @if (this.User.IsInRole("User") || this.User.IsInRole("Admin"))
+                { 
+                    <li class="fa fa-heart">@Html.ActionLink("LogOut", "LogOut", "Login")</li>
+                    <li class="fa fa-heart">@Html.ActionLink("Cart", "Cart", "Orders", new { userEmail = this.User.Identity.Name }, "")</li>
+                }
                 <li class="fa fa-heart">@Html.ActionLink("Login", "Login", "Login")</li>
                 <li class="fa fa-heart">@Html.ActionLink("Register", "Create", "Users")</li>
                 @if (this.User.IsInRole("Admin"))
