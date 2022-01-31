@@ -133,6 +133,9 @@ namespace ASPProject.Authentication
                             where string.Compare(userEmail, u.Email, StringComparison.OrdinalIgnoreCase) == 0
                             select u).FirstOrDefault();
                 
+                if (user == null)
+                    return false;
+
                 return BCrypt.Net.BCrypt.Verify(password, user.Password);
             }
         }

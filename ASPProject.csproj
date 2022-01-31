@@ -126,8 +126,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\DataImage\HP-laptop1.jpg" />
+    <Content Include="Content\DataImage\asus.png" />
+    <Content Include="Content\DataImage\hp.png" />
+    <Content Include="Content\DataImage\logitech_keyboard.png" />
     <Content Include="Content\DataImage\no-image.png" />
+    <Content Include="Content\DataImage\rgb_keyboard.png" />
+    <Content Include="Content\DataImage\samsung.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Images\buttonbg2.png" />

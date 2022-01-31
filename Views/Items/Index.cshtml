@@ -62,19 +62,14 @@
                 <div class='col-m'>
                     @Html.ShowItem(item)
                     <div class="item-actions">
-                        <p class='button'>
-
-                            @Html.ActionLink("Add To Cart", "ToCart", new { itemId = item.Id, userEmail = this.User.Identity.Name })
-                        </p>
-                        <p class='button'>
-                            @Html.ActionLink("Details", "Details", new { id = item.Id })
-                        </p>
+                        @Html.ActionLink("Add To Cart", "ToCart", new { itemId = item.Id, userEmail = this.User.Identity.Name }, new { @class = "button" })
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "button" })
                         @if (this.User.IsInRole("Admin"))
                         {
-                            <p class=''>
+                            <p>
                                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                             </p>
-                            <p class=''>
+                            <p>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.Id })
                             </p>
                         }

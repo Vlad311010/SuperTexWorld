@@ -1,7 +1,6 @@
 ﻿
 @{
     ViewBag.Title = "Login";
-    ViewBag.Error = "";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -22,8 +21,7 @@
 		</div>
 	
 		<div>
-			<!--  class="login_button" -->
-			<span class="button">
+			<span class="login_button">
 				@Html.ActionLink("Registration", "Create", "Users")
 			</span>
 		</div>

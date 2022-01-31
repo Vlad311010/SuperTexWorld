@@ -60,6 +60,7 @@ namespace ASPProject.Controllers
 
                     if (Url.IsLocalUrl(ReturnUrl))
                     {
+                        ViewBag.Error = "Something Wrong : Username or Password invalid ^_^ ";
                         return Redirect(ReturnUrl);
                     }
                     else
@@ -82,57 +83,5 @@ namespace ASPProject.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Items");
         }
-
-        /*
-            [HttpPost]
-            public ActionResult Registration(RegistrationView registrationView)
-            {
-                bool statusRegistration = false;
-                string messageRegistration = string.Empty;
-
-                if (ModelState.IsValid)
-                {
-                    // Email Verification
-                    string userName = Membership.GetUserNameByEmail(registrationView.Email);
-                    if (!string.IsNullOrEmpty(userName))
-                    {
-                        ModelState.AddModelError("Warning Email", "Sorry: Email already Exists");
-                        return View(registrationView);
-                    }
-
-                    //Save User Data
-                    using (AuthenticationDB dbContext = new AuthenticationDB())
-                    {
-                        var user = new User()
-                        {
-                            Username = registrationView.Username,
-                            FirstName = registrationView.FirstName,
-                            LastName = registrationView.LastName,
-                            Email = registrationView.Email,
-                            Password = registrationView.Password,
-                            ActivationCode = Guid.NewGuid(),
-                        };
-
-                        dbContext.Users.Add(user);
-                        dbContext.SaveChanges();
-                    }
-
-                    //Verification Email
-                    VerificationEmail(registrationView.Email, registrationView.ActivationCode.ToString());
-                    messageRegistration = "Your account has been created successfully. ^_^";
-                    statusRegistration = true;
-                }
-                else
-                {
-                    messageRegistration = "Something Wrong!";
-                }
-                ViewBag.Message = messageRegistration;
-                ViewBag.Status = statusRegistration;
-
-                return View(registrationView);
-            }
-
-
-        */
     }
 }
