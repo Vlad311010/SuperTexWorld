@@ -63,7 +63,6 @@ namespace ASPProject.Helpers
 							"<div class='clearfix'></div>" +
 						"</div>" +
 					"</div>";
-
 			html = string.Format(html, item.ImagePath, item.ItemName, item.Price, item.Id);
 
 			return new MvcHtmlString(html);

@@ -70,8 +70,9 @@ namespace ASPProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (item.ImagePath == null)
-                    item.ImagePath = "\\Content\\DataImage\\no-image.png";
+                if (String.IsNullOrEmpty(item.ImagePath))
+                    item.ImagePath = "no-image.png";
+
                 db.Items.Add(item);
                 db.SaveChanges();
                 return RedirectToAction("Index");

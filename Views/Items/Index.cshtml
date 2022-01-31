@@ -36,8 +36,8 @@
 <div>
     @if (this.User.IsInRole("Admin"))
     {
-        <span class="button">
-            @Html.ActionLink("Add New Item", "Create")
+        <span>
+            @Html.ActionLink("Add New Item", "Create", null, new { @class = "button" })
         </span>
     }
     @using (Html.BeginForm("Index", "Items"))
