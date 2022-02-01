@@ -27,10 +27,7 @@ namespace ASPProject.Controllers
         [HttpGet]
         public ActionResult Login(string ReturnUrl = "")
         {
-            /*if (User.Identity.IsAuthenticated)
-            {
-                return LogOut();
-            }*/
+
             ViewBag.ReturnUrl = ReturnUrl;
             return View();
         }
